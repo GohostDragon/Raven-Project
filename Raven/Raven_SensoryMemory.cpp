@@ -73,6 +73,25 @@ void Raven_SensoryMemory::UpdateWithSoundSource(Raven_Bot* pNoiseMaker)
   }
 }
 
+void Raven_SensoryMemory::UpdateTargetBot(Raven_Bot* pTarget)
+{
+    if (m_pOwner != pTarget)
+    {
+        MakeNewRecordIfNotAlreadyPresent(pTarget);
+
+        MemoryRecord& info = m_MemoryMap[pTarget];
+        if (pTarget->Health() > 0)
+            info.iHealth = pTarget->Health();
+        else
+            info.iHealth = 100;
+    }
+}
+
+int Raven_SensoryMemory::GetTargetBotHealth(Raven_Bot* pOpponent)
+{
+    MemoryRecord& info = m_MemoryMap[pOpponent];
+    return info.iHealth;
+}
 //----------------------------- UpdateVision ----------------------------------
 //
 //  this method iterates through all the bots in the game world to test if

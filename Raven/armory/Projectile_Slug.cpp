@@ -98,6 +98,11 @@ void Slug::TestForImpact()
                             (*it)->ID(),
                             Msg_TakeThatMF,
                             (void*)&m_iDamageInflicted);
+    Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY,
+        (*it)->ID(),
+        m_iShooterID,
+        Msg_HitBot,
+        (*it));
     
   }
 }

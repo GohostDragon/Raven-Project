@@ -68,6 +68,12 @@ void Bolt::Update()
                               hit->ID(),
                               Msg_TakeThatMF,
                               (void*)&m_iDamageInflicted);
+      //¸ÂÃá º¿ÇÑÅ×µµ Àü´Þ
+      Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY,
+                              hit->ID(),
+                              m_iShooterID,
+                              Msg_HitBot,
+                              hit);
     }
 
     //test for impact with a wall

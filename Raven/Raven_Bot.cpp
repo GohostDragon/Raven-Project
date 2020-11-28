@@ -230,7 +230,6 @@ bool Raven_Bot::HandleMessage(const Telegram& msg)
 
     //the extra info field of the telegram carries the amount of damage
     ReduceHealth(DereferenceToType<int>(msg.ExtraInfo));
-
     //if this bot is now dead let the shooter know
     if (isDead())
     {
@@ -242,11 +241,19 @@ bool Raven_Bot::HandleMessage(const Telegram& msg)
     }
 
     return true;
+  //¸ÂÃá º¿ÇÑÅ×µµ ¸Þ¼¼Áö Àü´Þ
+  case Msg_HitBot:
+  {
+      //¸ÂÀº º¿
+      Raven_Bot* hitBot = (Raven_Bot*)msg.ExtraInfo;
+      //¸ÂÄ£º¿ ¸Þ¸ð¸®¿¡ ¸ÂÈùº¿ ¸Â¾Ò´Ù°í Ç¥½Ã
+      GetSensoryMem()->UpdateTargetBot(hitBot);
+      return true;
+  }
 
   case Msg_YouGotMeYouSOB:
     
     IncrementScore();
-    
     //the bot this bot has just killed should be removed as the target
     m_pTargSys->ClearTarget();
 

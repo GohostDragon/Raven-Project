@@ -46,13 +46,17 @@ public:
   //set to true if there is no obstruction between the opponent and the owner, 
   //permitting a shot.
   bool        bShootable;
+
+  //상대봇들 체력
+  int         iHealth;
   
 
   MemoryRecord():fTimeLastSensed(-999),
             fTimeBecameVisible(-999),
             fTimeLastVisible(0),
             bWithinFOV(false),
-            bShootable(false)
+            bShootable(false),
+            iHealth(100)
   {}
 };
 
@@ -91,6 +95,12 @@ public:
   //this method is used to update the memory map whenever an opponent makes
   //a noise
   void     UpdateWithSoundSource(Raven_Bot* pNoiseMaker);
+
+  //Hit 표시 
+  void     UpdateTargetBot(Raven_Bot* pBot);
+
+  //Helth 넘겨줌
+  int  GetTargetBotHealth(Raven_Bot* pOpponent);
 
   //this removes a bot's record from memory
   void     RemoveBotFromMemory(Raven_Bot* pBot);

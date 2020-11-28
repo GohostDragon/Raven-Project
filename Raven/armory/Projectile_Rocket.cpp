@@ -87,7 +87,11 @@ void Rocket::TestForImpact()
                               hit->ID(),
                               Msg_TakeThatMF,
                               (void*)&m_iDamageInflicted);
-
+      Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY,
+          hit->ID(),
+          m_iShooterID,
+          Msg_HitBot,
+          hit);
       //test for bots within the blast radius and inflict damage
       InflictDamageOnBotsWithinBlastRadius();
     }
@@ -141,6 +145,11 @@ void Rocket::InflictDamageOnBotsWithinBlastRadius()
                               (*curBot)->ID(),
                               Msg_TakeThatMF,
                               (void*)&m_iDamageInflicted);
+      Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY,
+          (*curBot)->ID(),
+          m_iShooterID,
+          Msg_HitBot,
+          (*curBot));
       
     }
   }  
